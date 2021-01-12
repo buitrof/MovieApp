@@ -61,7 +61,11 @@ document.addEventListener('click', event => {
     let limit = getCount(nomElements, false)
     document.getElementById(`nomButton-${index}`).setAttribute('disabled', 'true')
     if (limit === 6) {
-      console.log('ping')
+      let r = confirm("Thank you for nominating 5 films for the Shoppies! Review your nominations by clicking cancel or try again by pressing ok!")
+      if (r === true) {
+        location.reload();
+        return false;
+      }
     }
   } else if (event.target.classList.contains('removeNominations')) {
     let index = parseInt((event.target.value))
