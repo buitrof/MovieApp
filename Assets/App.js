@@ -1,4 +1,18 @@
 let movies = []
+let nomElements = document.getElementById('nominations')
+
+function getCount(parent, getChildrensChildren) {
+  let relevantChildren = 0
+  let children = parent.childNodes.length
+  for (let i = 0; i < children; i++) {
+    if (parent.childNodes[i].nodeType != 3) {
+      if (getChildrensChildren)
+        relevantChildren += getCount(parent.childNodes[i], true)
+      relevantChildren++
+    }
+  }
+  return relevantChildren
+}
 
 document.getElementById('searchMovie').addEventListener('click', event => {
   event.preventDefault()
@@ -6,7 +20,7 @@ document.getElementById('searchMovie').addEventListener('click', event => {
   fetch(`https://www.omdbapi.com/?s=${document.getElementById('title').value}&type=movie&apikey=5da35a24`)
     .then(r => r.json())
     .then(({ Search }) => {
-      movies.push(Search)
+      movies.unshift(Search)
       for (let i = 0; i < 8; i++) {
       let movieElem = document.createElement('div')
       movieElem.innerHTML = `
@@ -44,10 +58,14 @@ document.addEventListener('click', event => {
               </div>
           `
     document.getElementById('nominations').append(nomElem)
-    document.getElementById(`nomButton-${index}`).setAttribute("disabled", "true")
+    let limit = getCount(nomElements, false)
+    document.getElementById(`nomButton-${index}`).setAttribute('disabled', 'true')
+    if (limit === 6) {
+      console.log('ping')
+    }
   } else if (event.target.classList.contains('removeNominations')) {
     let index = parseInt((event.target.value))
     event.target.parentNode.parentNode.remove()
-    document.getElementById(`nomButton-${index}`).removeAttribute("disabled")
+    document.getElementById(`nomButton-${index}`).removeAttribute('disabled')
   }
 })
