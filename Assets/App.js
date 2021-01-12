@@ -3,7 +3,7 @@ let movies = []
 document.getElementById('searchMovie').addEventListener('click', event => {
   event.preventDefault()
   document.getElementById('movies').innerHTML = ''
-  fetch(`http://www.omdbapi.com/?s=${document.getElementById('title').value}&type=movie&apikey=5da35a24`)
+  fetch(`https://www.omdbapi.com/?s=${document.getElementById('title').value}&type=movie&apikey=5da35a24`)
     .then(r => r.json())
     .then(({ Search }) => {
       movies.push(Search)
