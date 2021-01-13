@@ -14,6 +14,8 @@ function getCount(parent, getChildrensChildren) {
   return relevantChildren
 }
 
+// document.getElementById('myModal').modal({ show: false })
+
 document.getElementById('searchMovie').addEventListener('click', event => {
   event.preventDefault()
   document.getElementById('movies').innerHTML = ''
@@ -61,15 +63,13 @@ document.addEventListener('click', event => {
     let limit = getCount(nomElements, false)
     document.getElementById(`nomButton-${index}`).setAttribute('disabled', 'true')
     if (limit === 6) {
-      let r = confirm("Thank you for nominating 5 films for the Shoppies! Review your nominations by clicking cancel or try again by pressing ok!")
-      if (r === true) {
-        location.reload();
-        return false;
-      }
+      $('#exampleModal').modal('show')
     }
   } else if (event.target.classList.contains('removeNominations')) {
     let index = parseInt((event.target.value))
     event.target.parentNode.parentNode.remove()
     document.getElementById(`nomButton-${index}`).removeAttribute('disabled')
+  } else if (event.target.classList.contains('reset')) {
+    location.reload()
   }
 })
