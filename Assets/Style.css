@@ -1,3 +1,13 @@
 .container {
   margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.card {
+  margin-bottom: 5px;
+  max-width: 30em;
+}
+
+.card-img-top {
+  max-height: 40em;
 }

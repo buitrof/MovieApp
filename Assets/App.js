@@ -14,8 +14,6 @@ function getCount(parent, getChildrensChildren) {
   return relevantChildren
 }
 
-// document.getElementById('myModal').modal({ show: false })
-
 document.getElementById('searchMovie').addEventListener('click', event => {
   event.preventDefault()
   document.getElementById('movies').innerHTML = ''
@@ -27,16 +25,12 @@ document.getElementById('searchMovie').addEventListener('click', event => {
       let movieElem = document.createElement('div')
       movieElem.innerHTML = `
       <div class="card">
-        <div class="card-image">
-          <img src="${Search[i].Poster}" alt="${Search[i].Title}">
-        </div>
-        <div class="card-content">
+        <img src="${Search[i].Poster}" alt="${Search[i].Title}" class="card-img-top">
+        <div class="card-body">
           <h4 class="card-title">${Search[i].Title}</h4>
           <h5>Year: ${Search[i].Year}</h5>
         </div>
-        <div class="card-action">
-          <button value="${i}" class="btn btn-success addNominations" id="nomButton-${i}">Add To Nominations</button>
-        </div>
+        <button value="${i}" class="btn btn-success addNominations" id="nomButton-${i}">Add To Nominations</button>
       </div>
       `
     document.getElementById('movies').append(movieElem)
@@ -51,11 +45,9 @@ document.addEventListener('click', event => {
     let nomElem = document.createElement('div')
     nomElem.className = 'card'
     nomElem.innerHTML = `
-              <div class="card-content">
+              <div class="card-body">
                 <h4>${movies.flat()[index].Title}</h4>
                 <h5>Year: ${movies.flat()[index].Year}</h5>
-              </div>
-              <div class="card-action">
                 <button value="${index}" class="btn btn-danger removeNominations id="remButton-${index}">Remove from Nominations</button>
               </div>
           `
